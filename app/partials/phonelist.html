@@ -1,0 +1,56 @@
+		<div class="col-md-3" style="margin-top:25px;">
+  			<div class="input-group">
+			  <input type="text" class="form-control" ng-model="search.name" placeholder="Search" aria-describedby="search">
+			  <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+			</div>
+			<div class="form-horizontal" style="margin-top:15px;">
+			  <div class="form-group">
+			    <label class="col-sm-3 control-label">Sort By</label>
+			    <div class="col-sm-9" style="font-family: 'Slabo 27px', serif;">
+			    	<select  class="form-control" ng-model="order">
+					  <option value="name" style="font-family: 'Slabo 27px', serif;">Alphabetical</option>
+					  <option value="age" style="font-family: 'Slabo 27px', serif;">Newest</option>
+					</select>
+			    </div>
+			  </div>
+			</div>
+			<div class="form-horizontal" style="margin-top:15px;">
+			  <div class="form-group">
+			    <label class="col-sm-3 control-label">List By</label>
+			    <div class="col-sm-9">
+					<a href="#!/phones/list" type="button" class="btn btn-lg btn-primary disabled "><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+					<a href="#!/phones/grid" type="button" class="btn btn-lg btn-primary  "><span  class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a>
+			    </div>
+			  </div>
+			</div>
+			<div class="form-group">
+				<p><b>Brand</b></p>
+				<div ng-repeat="comp in $ctrl.phones | unique: 'company'">
+					<div class="checkbox" >
+					  <label style="font-family: 'Slabo 27px', serif;">
+					    <input type="checkbox" value="{{comp.company}}" ng-model="comp.checked" ng-checked="comp.checked" >
+					    	{{comp.company}} 
+					  </label>
+					</div>
+				</div>
+			</div>
+  		</div>
+  		<div class="col-md-9" style="margin-top:25px;" >
+  			<div ng-repeat="list in $ctrl.phones | filter:search | orderBy: order | selectedPhones" >
+	  			<div class="panel panel-info">
+				  <div class="panel-heading">
+				    <a href="/#!/phones/{{list.id}}">
+				    	<h3 class="panel-title" style="font-family: 'Audiowide', cursive;">{{list.name}}</h3>
+				    </a>
+				  </div>
+				  <div class="panel-body">
+				  	<div class="col-md-2" align="center">
+				  		<img class="img-rounded img-responsive" ng-src="{{list.imageUrl}}">
+				  	</div>
+				  	<div class="col-md-10">
+				  		<p style=" vertical-align: middle;font-family: 'Slabo 27px', serif;">{{list.snippet}}</p>
+				  	</div>
+				  </div>
+				</div>
+			</div>
+  		</div>
